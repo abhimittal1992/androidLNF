@@ -1,12 +1,17 @@
 package info.androidhive.navigationdrawer.adaptor;
 
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import info.androidhive.navigationdrawer.R;
+import info.androidhive.navigationdrawer.activity.ScrollingActivity;
 
 import java.util.ArrayList;
 
@@ -20,11 +25,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewName;
         TextView textViewVersion;
         ImageView imageViewIcon;
+        CardView cv;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             this.textViewVersion = (TextView) itemView.findViewById(R.id.textViewVersion);
+            this.cv=(CardView)itemView.findViewById(R.id.android_card_view_example);
         }
     }
 
@@ -37,6 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cards_layout, parent, false);
+
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -51,6 +59,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         textViewName.setText(dataSet.get(listPosition).getName());
         textViewVersion.setText(dataSet.get(listPosition).getVersion());
+
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "This is my Toast message!",
+                        Toast.LENGTH_LONG).show();
+                Intent i = new Intent(view.getContext(), ScrollingActivity.class);
+                i.putExtra("name", holder.getItemId());
+                view.getContext().startActivity(i);
+            }
+
+        });
     }
 
     @Override

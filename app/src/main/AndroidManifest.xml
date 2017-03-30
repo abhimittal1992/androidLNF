@@ -34,7 +34,10 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/activity_title_privacy_policy" />
-
+        <activity
+            android:name=".activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
